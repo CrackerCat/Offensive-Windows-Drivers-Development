@@ -1,11 +1,5 @@
 # Offensive-Windows-Drivers-Development
 
-Aqui está um exemplo de um **README.md** que poderia ser usado para descrever o projeto "Offensive-Windows-Drivers-Development". Este documento aborda objetivos, estrutura e instruções básicas para uso:
-
----
-
-# Offensive Windows Drivers Development
-
 ## Overview
 
 **Offensive-Windows-Drivers-Development** is a research project designed to explore the development of Windows kernel-mode drivers for offensive security purposes. The project focuses on techniques for low-level interaction with the Windows operating system, including file system interception, process manipulation, and advanced memory operations.
