@@ -1,6 +1,6 @@
 #include <ntddk.h>
 #include <wdf.h>
-#include "Device.h" // Certifique-se de que este cabeçalho está incluído
+#include "Device.h" 
 
 DRIVER_INITIALIZE DriverEntry;
 EVT_WDF_DRIVER_DEVICE_ADD CryptoDriverEvtDeviceAdd;
@@ -39,5 +39,5 @@ CryptoDriverEvtDeviceAdd(
     _Inout_ PWDFDEVICE_INIT DeviceInit
 ) {
     UNREFERENCED_PARAMETER(Driver);
-    return CryptoDeviceCreate(DeviceInit); // Função definida em Device.c
+    return CryptoDeviceCreate(DeviceInit); // FunÃ§Ã£o definida em Device.c
 }
