@@ -1,0 +1,16 @@
+﻿  Building 'CryptoDriver2' with toolset 'WindowsKernelModeDriver10.0' and the 'Universal' target platform.
+  Stamping x64\Release\CryptoDriver2.inf
+  Stamping [Version] section with DriverVer=01/14/2025,12.34.32.709
+  CryptoDriver2.vcxproj -> C:\Users\RedTeam\source\repos\CryptoDriver2\x64\Release\CryptoDriver2.sys
+C:\Program Files (x86)\Windows Kits\10\build\10.0.26100.0\WindowsDriver.common.targets(1517,5): error MSB4018: Falha inesperada da tarefa "SignTask".
+C:\Program Files (x86)\Windows Kits\10\build\10.0.26100.0\WindowsDriver.common.targets(1517,5): error MSB4018: System.Security.Cryptography.CryptographicException: Access is denied.
+C:\Program Files (x86)\Windows Kits\10\build\10.0.26100.0\WindowsDriver.common.targets(1517,5): error MSB4018: 
+C:\Program Files (x86)\Windows Kits\10\build\10.0.26100.0\WindowsDriver.common.targets(1517,5): error MSB4018:    em Microsoft.DriverKit.Build.Shared.CreateCertificate.CryptAcquireContext(String keyContainerName, String providerName, PROV providerType)
+C:\Program Files (x86)\Windows Kits\10\build\10.0.26100.0\WindowsDriver.common.targets(1517,5): error MSB4018:    em Microsoft.DriverKit.Build.Shared.CreateCertificate.CreateSelfSignedCertificate()
+C:\Program Files (x86)\Windows Kits\10\build\10.0.26100.0\WindowsDriver.common.targets(1517,5): error MSB4018:    em Microsoft.DriverKit.Build.Tasks.SignTask.AutoGenerateTestCertificate()
+C:\Program Files (x86)\Windows Kits\10\build\10.0.26100.0\WindowsDriver.common.targets(1517,5): error MSB4018:    em Microsoft.DriverKit.Build.Tasks.SignTask.AutoPickTestCertificate()
+C:\Program Files (x86)\Windows Kits\10\build\10.0.26100.0\WindowsDriver.common.targets(1517,5): error MSB4018:    em Microsoft.DriverKit.Build.Tasks.SignTask.GenerateCommandLineCommands()
+C:\Program Files (x86)\Windows Kits\10\build\10.0.26100.0\WindowsDriver.common.targets(1517,5): error MSB4018:    em Microsoft.Build.Utilities.ToolTask.Execute()
+C:\Program Files (x86)\Windows Kits\10\build\10.0.26100.0\WindowsDriver.common.targets(1517,5): error MSB4018:    em Microsoft.DriverKit.Build.Tasks.TrackedVCToolTask.Execute()
+C:\Program Files (x86)\Windows Kits\10\build\10.0.26100.0\WindowsDriver.common.targets(1517,5): error MSB4018:    em Microsoft.Build.BackEnd.TaskExecutionHost.Execute()
+C:\Program Files (x86)\Windows Kits\10\build\10.0.26100.0\WindowsDriver.common.targets(1517,5): error MSB4018:    em Microsoft.Build.BackEnd.TaskBuilder.<ExecuteInstantiatedTask>d__26.MoveNext()

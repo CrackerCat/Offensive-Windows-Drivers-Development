@@ -1,0 +1,23 @@
+﻿  Building 'CryptoDriver2' with toolset 'WindowsKernelModeDriver10.0' and the 'Universal' target platform.
+  Stamping x64\Debug\CryptoDriver2.inf
+  Stamping [Version] section with DriverVer=01/14/2025,12.47.54.982
+  Queue.c
+  CryptoDriver2.vcxproj -> C:\Users\RedTeam\source\repos\CryptoDriver2\x64\Debug\CryptoDriver2.sys
+  Done Adding Additional Store
+  Successfully signed: C:\Users\RedTeam\source\repos\CryptoDriver2\x64\Debug\CryptoDriver2.sys
+  
+  Driver is 'Universal'.
+  .........................
+  Signability test complete.
+  
+  Errors:
+  None
+  
+  Warnings:
+  None
+  
+  Catalog generation complete.
+  C:\Users\RedTeam\source\repos\CryptoDriver2\x64\Debug\CryptoDriver2\cryptodriver2.cat
+  Done Adding Additional Store
+  Successfully signed: C:\Users\RedTeam\source\repos\CryptoDriver2\x64\Debug\CryptoDriver2\cryptodriver2.cat
+  

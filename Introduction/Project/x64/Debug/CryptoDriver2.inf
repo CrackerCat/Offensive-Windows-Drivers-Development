@@ -1,0 +1,62 @@
+;
+; CryptoDriver2.inf
+;
+
+[Version]
+Signature   = "$WINDOWS NT$"
+Class       = System ; TODO: specify appropriate Class
+ClassGuid   = {4d36e97d-e325-11ce-bfc1-08002be10318} ; TODO: specify appropriate ClassGuid
+Provider    = %ManufacturerName%
+CatalogFile = CryptoDriver2.cat
+DriverVer = 01/14/2025,12.47.54.982
+PnpLockdown = 1
+
+[DestinationDirs]
+DefaultDestDir = 13
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+CryptoDriver2.sys  = 1,,
+
+;*****************************************
+; Install Section
+;*****************************************
+
+[Manufacturer]
+%ManufacturerName% = Standard,NTamd64.10.0...16299 ; %13% support introduced in build 16299
+
+[Standard.NTamd64.10.0...16299]
+%CryptoDriver2.DeviceDesc% = CryptoDriver2_Device, Root\CryptoDriver2 ; TODO: edit hw-id
+
+[CryptoDriver2_Device.NT]
+CopyFiles = File_Copy
+
+[File_Copy]
+CryptoDriver2.sys
+
+;-------------- Service installation
+[CryptoDriver2_Device.NT.Services]
+AddService = CryptoDriver2,%SPSVCINST_ASSOCSERVICE%, CryptoDriver2_Service_Inst
+
+; -------------- CryptoDriver2 driver install sections
+[CryptoDriver2_Service_Inst]
+DisplayName    = %CryptoDriver2.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %13%\CryptoDriver2.sys
+
+[CryptoDriver2_Device.NT.Wdf]
+KmdfService = CryptoDriver2, CryptoDriver2_wdfsect
+
+[CryptoDriver2_wdfsect]
+KmdfLibraryVersion = 1.15
+
+[Strings]
+SPSVCINST_ASSOCSERVICE = 0x00000002
+ManufacturerName = "<Your manufacturer name>" ;TODO: Replace with your manufacturer name
+DiskName = "CryptoDriver2 Installation Disk"
+CryptoDriver2.DeviceDesc = "CryptoDriver2 Device"
+CryptoDriver2.SVCDESC = "CryptoDriver2 Service"
