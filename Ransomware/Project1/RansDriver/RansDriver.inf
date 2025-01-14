@@ -1,0 +1,62 @@
+;
+; RansDriver.inf
+;
+
+[Version]
+Signature   = "$WINDOWS NT$"
+Class       = System ; TODO: specify appropriate Class
+ClassGuid   = {4d36e97d-e325-11ce-bfc1-08002be10318} ; TODO: specify appropriate ClassGuid
+Provider    = %ManufacturerName%
+CatalogFile = RansDriver.cat
+DriverVer   = ; TODO: set DriverVer in stampinf property pages
+PnpLockdown = 1
+
+[DestinationDirs]
+DefaultDestDir = 13
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+RansDriver.sys  = 1,,
+
+;*****************************************
+; Install Section
+;*****************************************
+
+[Manufacturer]
+%ManufacturerName% = Standard,NT$ARCH$.10.0...16299 ; %13% support introduced in build 16299
+
+[Standard.NT$ARCH$.10.0...16299]
+%RansDriver.DeviceDesc% = RansDriver_Device, Root\RansDriver ; TODO: edit hw-id
+
+[RansDriver_Device.NT]
+CopyFiles = File_Copy
+
+[File_Copy]
+RansDriver.sys
+
+;-------------- Service installation
+[RansDriver_Device.NT.Services]
+AddService = RansDriver,%SPSVCINST_ASSOCSERVICE%, RansDriver_Service_Inst
+
+; -------------- RansDriver driver install sections
+[RansDriver_Service_Inst]
+DisplayName    = %RansDriver.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %13%\RansDriver.sys
+
+[RansDriver_Device.NT.Wdf]
+KmdfService = RansDriver, RansDriver_wdfsect
+
+[RansDriver_wdfsect]
+KmdfLibraryVersion = $KMDFVERSION$
+
+[Strings]
+SPSVCINST_ASSOCSERVICE = 0x00000002
+ManufacturerName = "<Your manufacturer name>" ;TODO: Replace with your manufacturer name
+DiskName = "RansDriver Installation Disk"
+RansDriver.DeviceDesc = "RansDriver Device"
+RansDriver.SVCDESC = "RansDriver Service"
