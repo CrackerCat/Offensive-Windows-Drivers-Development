@@ -2,19 +2,15 @@
 
 #define IOCTL_VULNERABLE CTL_CODE(FILE_DEVICE_UNKNOWN, 0x800, METHOD_BUFFERED, FILE_ANY_ACCESS)
 
-// Nomes para o dispositivo e o link simbólico
 UNICODE_STRING DEVICE_NAME = RTL_CONSTANT_STRING(L"\\Device\\VulnerableDriver");
 UNICODE_STRING DEVICE_SYMBOLIC_NAME = RTL_CONSTANT_STRING(L"\\??\\VulnerableDriverLink");
 
-// Função para descarregar o driver
 void DriverUnload(PDRIVER_OBJECT DriverObject) {
-    // Remover o link simbólico e o dispositivo
     IoDeleteSymbolicLink(&DEVICE_SYMBOLIC_NAME);
     IoDeleteDevice(DriverObject->DeviceObject);
-    DbgPrint("Driver descarregado e recursos liberados.\n");
+    DbgPrint("Driver unloaded\n");
 }
 
-// Função para obter o processo SYSTEM
 NTSTATUS GetSystemProcess(PEPROCESS* SystemProcess) {
     NTSTATUS status;
     HANDLE hSystemProcess;
@@ -22,23 +18,22 @@ NTSTATUS GetSystemProcess(PEPROCESS* SystemProcess) {
     CLIENT_ID clientId;
 
     InitializeObjectAttributes(&objAttr, NULL, OBJ_KERNEL_HANDLE, NULL, NULL);
-    clientId.UniqueProcess = (HANDLE)4; // PID do SYSTEM
+    clientId.UniqueProcess = (HANDLE)4; // PID SYSTEM
     clientId.UniqueThread = NULL;
 
-    // Abrir o processo SYSTEM
+    // Open Process SYSTEM
     status = ZwOpenProcess(&hSystemProcess, PROCESS_ALL_ACCESS, &objAttr, &clientId);
     if (!NT_SUCCESS(status)) {
         return status;
     }
 
-    // Obter referência ao objeto do processo
     status = ObReferenceObjectByHandle(hSystemProcess, PROCESS_ALL_ACCESS, *PsProcessType, KernelMode, (PVOID*)SystemProcess, NULL);
     ZwClose(hSystemProcess);
 
     return status;
 }
 
-// Manipulador para o IOCTL
+//  IOCTL Manipulation
 NTSTATUS IoControlHandler(PDEVICE_OBJECT DeviceObject, PIRP Irp) {
     UNREFERENCED_PARAMETER(DeviceObject);
 
@@ -70,7 +65,7 @@ NTSTATUS IoControlHandler(PDEVICE_OBJECT DeviceObject, PIRP Irp) {
 NTSTATUS MajorFunctions(PDEVICE_OBJECT DeviceObject, PIRP Irp) {
     UNREFERENCED_PARAMETER(DeviceObject);
 
-    DbgPrint("IRP_MJ_CREATE recebido.\n");
+    DbgPrint("IRP_MJ_CREATE receive.\n");
 
     Irp->IoStatus.Status = STATUS_SUCCESS;
     Irp->IoStatus.Information = 0;
@@ -79,14 +74,13 @@ NTSTATUS MajorFunctions(PDEVICE_OBJECT DeviceObject, PIRP Irp) {
     return STATUS_SUCCESS;
 }
 
-// DriverEntry aprimorado
 NTSTATUS DriverEntry(PDRIVER_OBJECT DriverObject, PUNICODE_STRING RegistryPath) {
     UNREFERENCED_PARAMETER(RegistryPath);
 
     PDEVICE_OBJECT deviceObject;
     NTSTATUS status;
 
-    // Criar o dispositivo
+    // Create device
     status = IoCreateDevice(
         DriverObject,
         0,
@@ -98,22 +92,21 @@ NTSTATUS DriverEntry(PDRIVER_OBJECT DriverObject, PUNICODE_STRING RegistryPath) 
     );
 
     if (!NT_SUCCESS(status)) {
-        DbgPrint("Erro ao criar dispositivo: %08x\n", status);
+        DbgPrint("Error create device %08x\n", status);
         return status;
     }
 
 
-    // Criar o link simbólico
     status = IoCreateSymbolicLink(&DEVICE_SYMBOLIC_NAME, &DEVICE_NAME);
     if (!NT_SUCCESS(status)) {
-        DbgPrint("Erro ao criar link simbólico: %08x\n", status);
+        DbgPrint("Error create link simbÃ³lico: %08x\n", status);
         IoDeleteDevice(deviceObject);
         return status;
     }
 
-    DbgPrint("Dispositivo e link simbólico criados com sucesso.\n");
+    DbgPrint("Device and Symbolic Links created.\n");
 
-    // Configurar rotinas de IRP
+    // Routines IRP
     DriverObject->MajorFunction[IRP_MJ_CREATE] = MajorFunctions;
     DriverObject->MajorFunction[IRP_MJ_CLOSE] = MajorFunctions;
     DriverObject->MajorFunction[IRP_MJ_DEVICE_CONTROL] = IoControlHandler;
