@@ -28,7 +28,6 @@ The goal is to provide insights into Windows internals and practical implementat
 ## References
 https://www.blackhat.com/docs/eu-17/materials/eu-17-Corina-Difuzzing-Android-Kernel-Drivers.pdf
 
-
 https://voidsec.com/windows-drivers-reverse-engineering-methodology/
 
 https://github.com/koutto/ioctlbf
@@ -52,4 +51,10 @@ https://research.checkpoint.com/2024/breaking-boundaries-investigating-vulnerabl
 https://blogs.vmware.com/security/2023/10/hunting-vulnerable-kernel-drivers.html
 
 https://www.unknowncheats.me/forum/general-programming-and-reversing/461976-methodology-static-reverse-engineering-windows-kernel-drivers.html
+
+https://www.youtube.com/watch?v=7Trgnw7HkeE&ab_channel=OffByOneSecurity
+
+https://www.youtube.com/watch?v=ViWLMfSwGVA&ab_channel=OALabs
+
+https://www.youtube.com/watch?v=cabuolISweY&ab_channel=NirLichtman
 
