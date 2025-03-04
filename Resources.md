@@ -32,6 +32,9 @@ A collection of various vulnerable (mostly physical memory exposing) drivers.
 [LolDrivers](https://www.loldrivers.io/)  
 A list of vulnerable drivers for exploitation.
 
+## Process Access Right List
+[Threathunterplaybook](https://threathunterplaybook.com/library/windows/process_access_rights.html)
+
 ## Blog Resources  
 
 - [H0mbre's Blog](https://h0mbre.github.io/) - PoCs and research in drivers by H0mbre.  
